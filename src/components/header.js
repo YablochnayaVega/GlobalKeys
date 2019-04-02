@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 class Header extends Component {
+
     render() {
         return (
             <>
@@ -19,12 +20,9 @@ class Header extends Component {
                     <a className="btn btn-light my-2 my-sm-0" href="/">Авторизация</a>
                     <ul></ul>
                     <a className="btn btn-outline-light my-2 my-sm-0" href="/registration">Регистрация</a>
-
                 </div>
             </nav>
-
             <br/>
-
             <div className="container">
                 <div style={{margin: 'auto'}} className="row">
                     <div className="col-lg work-field">

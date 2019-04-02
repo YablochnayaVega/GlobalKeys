@@ -5,6 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <div className="App">
+        <App />
+    </div>
+    , document.getElementById('root'));
 
 serviceWorker.unregister();
