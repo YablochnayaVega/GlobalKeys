@@ -39,7 +39,7 @@ class Hotel extends Component {
         <div style={{ border: '1px double grey' }} className="alert alert-light" role="alert" key={hotel.Id}>
             <h3>{hotel.Name}</h3>
             <br/>
-            <Img width="100%"  src={hotel.Photo}/>
+            <a href="/chosenhotel"><Img width="100%"  src={hotel.Photo}/></a>
             <br/><br/>
             <p> {hotel.Stars}/5</p>
             <p> &#10163;  {hotel.Address}</p>
@@ -56,7 +56,8 @@ class Hotel extends Component {
                 <div style={{margin: 'auto'}} className="row" >
                     <div className="col-lg work-field">
                         <div className="alert alert-light" role="alert"> 
-                            {this.state.hotels.map(hotel => this.getHotel(hotel))}   
+                            {this.state.hotels.map(hotel => this.getHotel(hotel))} 
+                            {/*{this.state.hotels.filter({city_id} => city_id === Id)}   */}
                         </div>
                     </div>
                 </div>

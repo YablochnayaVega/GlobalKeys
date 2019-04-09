@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/googlemaps": "^3.30.19",
+    "@types/markerclustererplus": "^2.1.33",
     "bootstrap": "^4.3.1",
     "jquery": "^1.9.1",
     "mdbreact": "^4.11.1",
@@ -12,6 +14,7 @@
     "react": "^16.8.4",
     "react-daterange-picker": "^2.0.1",
     "react-dom": "^16.8.2",
+    "react-google-maps": "^9.4.5",
     "react-image": "^2.0.0",
     "react-image-hover": "^1.0.3",
     "react-router-dom": "^5.0.0",

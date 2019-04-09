@@ -34,20 +34,36 @@ class Header extends Component {
                                     <label htmlFor="city">Город</label>
                                     <select type={'text'} className="form-control" id="city" name="city" required>
                                         <option></option>
+                                        <option>Москва</option>
+                                        <option>Санкт-Петербург</option>
+                                        <option>Тюмень</option>
+                                        <option>Грозный</option>
+                                        <option>Казань</option>
+                                    </select>
+                                </div>
+                                <div className="col-md-2 mb-2">
+                                    <label htmlFor="dates">Дата прибытия</label>
+                                    <input type="date" className="form-control datebox" id="datearr" name="datearr"
+                                           required/>
+                                </div>
+                                <div className="col-md-2 mb-2">
+                                    <label htmlFor="dates">Дата выезда</label>
+                                    <input type="date" className="form-control datebox" id="dateret" name="dateret"
+                                           required/>
+                                </div>
+                                <div className="col-md-2 mb-2">
+                                    <label htmlFor="count_guests">Количество гостей</label>
+                                    <select type="number" className="form-control" id="places" name="places" required>
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                     </select>
                                 </div>
                                 <div className="col-md-3 mb-3">
-                                    <label htmlFor="dates">Даты</label>
-                                    <input type="text" className="form-control datebox" id="date" name="date"
-                                           required/>
-                                </div>
-                                <div className="col-md-3 mb-3">
-                                    <label htmlFor="count_guests">Количество гостей</label>
-                                    <input type="number" min="1" className="form-control" id="persons" name="persons" required/>
-                                </div>
-                                <div className="col-md-3 mb-3">
                                     <br/>
-
                                     <button className="btn btn-outline-info btn-lg" type="submit">Найти</button>
                                 </div>
                             </div>

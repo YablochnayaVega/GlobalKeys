@@ -1,6 +1,6 @@
 #GlobalKeys Client App
 
-![preview](./preview.gif)
+![preview](./preview)
 
 In the project directory, you can run:
 
@@ -10,7 +10,7 @@ to start app and
 
 ### `npm run api`
 
-to start build of api
+to start builded api
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
