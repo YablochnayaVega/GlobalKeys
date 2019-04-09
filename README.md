@@ -1,7 +1,5 @@
 #GlobalKeys Client App
 
-![preview](./preview)
-
 In the project directory, you can run:
 
 ### `npm start`
