@@ -1,25 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
-// import Home from "./components/home";
-// import Hotel from "./components/hotel";
-import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.css';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import reducer from './reducers';
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
-    <div className="App">
-        <App />
-    </div>
+    <Provider store={store}>
+        <App/>
+    </Provider>
     , document.getElementById('root'));
-
-serviceWorker.unregister();
-
-// {/* <Router>
-//     <Switch>
-//         <Route path="/home" component={Home}/>
-//         <Route path="/hotel" component={Hotel}/>
-//         <Route path="/" component={App}/>
-//     </Switch>
-// </Router> */}
