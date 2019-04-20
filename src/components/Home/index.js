@@ -28,7 +28,7 @@ class Home extends Component {
         </div>;
 
     updateSearchParams = (cityId) => {
-        this.props.onUpdateSearchParams({...this.state.searchParams, city: cityId});
+        this.props.onUpdateSearchParams({...this.state.searchParams, city:cityId});
         this.props.history.push('/hotels')
     };
 

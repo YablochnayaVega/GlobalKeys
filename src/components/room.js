@@ -1,28 +1,26 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
 
 let Img = require('react-image');
 
 class Room extends Component {
-    constructor(props) {
-        super(props);
-
-        this.gettingHotel().catch(e => { console.error(e) });
-
-        this.state = {
+    state = {
             hotels: [],
-        }
+
     }
 
-
-    gettingHotel = async () => {
-        const url = await fetch('http://localhost:8080/api/hotel');
-        this.setState({ hotels: await url.json() || [] })
-    };
+    componentDidMount() {
+        fetch('https://globalkeys.herokuapp.com/api/hotel')
+            .then(res => res.json())
+            .then(json => this.setState({hotels: json}))
+            .catch(e => console.error((e)));
+    }
 
     getHotel = (hotel) =>
-        <div className="alert alert-light" role="alert" key={hotel.Id}>
-            <h3>{hotel.Name}</h3>
+        <div className="alert alert-light" role="alert" key={hotel.id}>
+            <h3>{hotel.name}</h3>
             <br/>
             <div className="row">
                 <div className="col-md-6 mb-6">
@@ -32,7 +30,7 @@ class Room extends Component {
                 </div>
                 <div className="col-md-6 mb-6">
                     <div>
-                        <p> &#10163;  {hotel.Address}</p>
+                        <p> &#10163;  {hotel.address}</p>
                         <span>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac lectus massa. Vivamus lobortis urna leo, a viverra turpis mattis at. Maecenas libero sem, ultrices non suscipit sed, lobortis vitae velit. Etiam massa orci, hendrerit ac elit pellentesque, gravida elementum neque. Aliquam eu porta augue. Vestibulum mollis ex sit amet ligula efficitur gravida. Sed faucibus nec erat non scelerisque. Morbi tellus risus, dictum vel ligula at, consectetur tempor lacus. Maecenas quis sollicitudin tortor, et commodo dolor. Fusce sit amet orci commodo, iaculis nibh ac, auctor massa. Etiam elementum tempus erat eget interdum. 
                         </span>
@@ -83,22 +81,21 @@ class Room extends Component {
                                 Nam eu tempus magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. In hac habitasse platea dictumst. Nam eu tellus eget ligula porttitor suscipit ut a ante. Nulla finibus mi eget elit ornare, ut placerat massa aliquet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec non vulputate nibh. Nulla convallis turpis purus. Quisque tellus felis, posuere sed nisi quis, tempus imperdiet ipsum. 
                             </span>
                         </div>
-            
-        
-            
-            
         </div>
 
-    
+
 
     render() {
+        const {searchParams} = this.props;
+        console.log(this.state)
         return (
             <>
             <div className="container">
                 <div style={{margin: 'auto'}} className="row" >
                     <div className="col-lg work-field">
                         <div className="alert alert-light" role="alert"> 
-                            {this.state.hotels.map(hotel => this.getHotel(hotel))} 
+                            {this.state.hotels.filter(({id}) => id === searchParams.hotel)
+                                .map(hotel => this.getHotel(hotel))}
                             {/*{this.state.hotels.filter({city_id} => city_id === Id)}   */}
                         </div>
                     </div>
@@ -110,4 +107,14 @@ class Room extends Component {
     }
 }
 
-export default Room;
+const mapStateToProps = (state) => ({
+    searchParams: state.searchStore
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onUpdateSearchParams: (payload) => {
+        dispatch({type: 'UPDATE_SEARCH', payload});
+    },
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Room));

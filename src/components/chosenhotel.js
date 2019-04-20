@@ -1,27 +1,25 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
 
 let Img = require('react-image');
 
 class ChosenHotel extends Component {
-    constructor(props) {
-        super(props);
-
-        this.gettingHotel().catch(e => { console.error(e) });
-
-        this.state = {
-            hotels: [],
-        }
-    }
-
-
-    gettingHotel = async () => {
-        const url = await fetch('http://localhost:8080/api/hotel');
-        this.setState({ hotels: await url.json() || [] })
+    state = {
+        hotels: [],
     };
 
+
+    componentDidMount() {
+        fetch('https://globalkeys.herokuapp.com/api/hotel')
+            .then(res => res.json())
+            .then(json => this.setState({hotels: json}))
+            .catch(e => console.error((e)));
+    }
+
     getHotel = (hotel) =>
-        <div className="alert alert-light" role="alert" key={hotel.Id}>
+        <div className="alert alert-light" role="alert" key={hotel.id}>
             <h3>{hotel.name}</h3>
             <br/>
             <Img width="100%"  src={hotel.photo}/>
@@ -74,7 +72,7 @@ class ChosenHotel extends Component {
                                 <div className="col-md-3 mb-3">
                                     <br/>
 
-                                    <button className="btn btn-outline-info btn-lg" type="submit">Забронировать</button>
+                                    <button onClick={() => this.updateSearchParams(hotel.id)} className="btn btn-outline-info btn-lg" type="submit" key={hotel.id}>Забронировать</button>
                                 </div>
                             </div>
                         </form>
@@ -85,22 +83,24 @@ class ChosenHotel extends Component {
                                 Nam eu tempus magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. In hac habitasse platea dictumst. Nam eu tellus eget ligula porttitor suscipit ut a ante. Nulla finibus mi eget elit ornare, ut placerat massa aliquet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec non vulputate nibh. Nulla convallis turpis purus. Quisque tellus felis, posuere sed nisi quis, tempus imperdiet ipsum. 
                             </span>
                         </div>
-            
-        
-            
-            
         </div>
 
-    
+    updateSearchParams = (id) => {
+        this.props.onUpdateSearchParams({...this.state.searchParams, hotel: id});
+        this.props.history.push('/room')
+    };
 
     render() {
+        const {searchParams} = this.props;
+        console.log(this.state)
         return (
             <>
             <div className="container">
                 <div style={{margin: 'auto'}} className="row" >
                     <div className="col-lg work-field">
                         <div className="alert alert-light" role="alert"> 
-                            {this.state.hotels.map(hotel => this.getHotel(hotel))} 
+                            {this.state.hotels.filter(({id}) => id === searchParams.hotel)
+                                .map(hotel => this.getHotel(hotel))}
                             {/*{this.state.hotels.filter({city_id} => city_id === Id)}   */}
                         </div>
                     </div>
@@ -112,4 +112,14 @@ class ChosenHotel extends Component {
     }
 }
 
-export default ChosenHotel;
+const mapStateToProps = (state) => ({
+    searchParams: state.searchStore
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onUpdateSearchParams: (payload) => {
+        dispatch({type: 'UPDATE_SEARCH', payload});
+    },
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChosenHotel));

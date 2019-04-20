@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
 let Img = require('react-image');
 
@@ -25,13 +26,18 @@ class Hotel extends Component {
         <div style={{border: '1px double grey'}} className="alert alert-light" role="alert" key={hotel.id}>
             <h3>{hotel.name}</h3>
             <br/>
-            <a href="/chosenhotel"><Img width="100%" src={hotel.photo}/></a>
+            <div onClick={() => this.updateSearchParams(hotel.id)}><Img width="100%" src={hotel.photo}/></div>
             <br/><br/>
             <p> {hotel.stars}/5</p>
             <p> &#10163;  {hotel.address}</p>
             <p> Минимальная цена зa ночь: </p>
 
         </div>
+
+    updateSearchParams = (id) => {
+        this.props.onUpdateSearchParams({...this.state.searchParams, hotel: id});
+        this.props.history.push('/chosenhotels')
+    };
 
 
     render() {
@@ -65,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hotel);
+export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(Hotel));

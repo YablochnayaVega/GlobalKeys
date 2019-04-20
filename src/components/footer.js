@@ -7,7 +7,7 @@ class Footer extends Component {
             <footer className="footer font-weight-light text-center  navbar-fixed-bottom">
                 <div id="footer-data">
                     @GlobalKeys 2019
-                    <br/>
+                    <br/><br/>
                 </div>
 
             </footer>
