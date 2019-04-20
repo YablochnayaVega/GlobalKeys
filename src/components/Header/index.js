@@ -9,6 +9,14 @@ class Index extends Component {
         cities: []
     };
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.searchParams !== nextProps.searchParams) {
+            this.setState({
+                searchParams: nextProps.searchParams,
+            });
+        }
+    }
+
     cityRef = createRef();
     startDatetimeRef = createRef();
     endDatetimeRef = createRef();
@@ -90,7 +98,7 @@ class Index extends Component {
                                         ref={this.cityRef}
                                         className="form-control"
                                         onChange={this.addCityToState}
-                                        value={this.props.searchParams.city}
+                                        value={this.state.searchParams.city}
                                         required>
                                         <option/>
                                         {this.state.cities.map(city =>
@@ -101,7 +109,7 @@ class Index extends Component {
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="dates">Дата прибытия</label>
                                     <input
-                                        value={this.props.searchParams.startDatetime}
+                                        value={this.state.searchParams.startDatetime}
                                         ref={this.startDatetimeRef}
                                         onChange={this.addStartDatetimeToState}
                                         className="form-control"
@@ -112,7 +120,7 @@ class Index extends Component {
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="dates">Дата выезда</label>
                                     <input
-                                        value={this.props.searchParams.endDatetime}
+                                        value={this.state.searchParams.endDatetime}
                                         ref={this.endDatetimeRef}
                                         onChange={this.addEndDatetimeToState}
                                         className="form-control"
@@ -123,7 +131,7 @@ class Index extends Component {
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="count_guests">Количество гостей</label>
                                     <select
-                                        value={this.props.searchParams.guests}
+                                        value={this.state.searchParams.guests}
                                         ref={this.guestsCountRef}
                                         className="form-control"
                                         onChange={this.addGuestsToState}

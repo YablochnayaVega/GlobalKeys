@@ -36,7 +36,6 @@ class Hotel extends Component {
 
     render() {
         const {searchParams} = this.props;
-        console.log(this.state)
         return (
             <>
                 <div className="container">
