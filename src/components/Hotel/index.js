@@ -1,28 +1,18 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
 
 let Img = require('react-image');
 
-export default class Hotel extends Component {
+class Hotel extends Component {
     state = {
         hotels: [],
     };
 
     componentDidMount() {
-        fetch('https://globalkeys.herokuapp.com/api/city')
+        fetch('https://globalkeys.herokuapp.com/api/hotel')
             .then(res => res.json())
             .then(json => this.setState({hotels: json}))
             .catch(e => console.error((e)));
-    }
-
-    createStars = () => {
-        let star = []
-        for (let i = 0; i < 4; i++) {
-            star.push(<span> &#9733; </span>)
-        }
-        for (let i = 0; i < 1; i++) {
-            star.push(<span> &#9734; </span>)
-        }
-        return star
     }
 
 
@@ -32,26 +22,29 @@ export default class Hotel extends Component {
     // };
 
     getHotel = (hotel) =>
-        <div style={{border: '1px double grey'}} className="alert alert-light" role="alert" key={hotel.Id}>
-            <h3>{hotel.Name}</h3>
+        <div style={{border: '1px double grey'}} className="alert alert-light" role="alert" key={hotel.id}>
+            <h3>{hotel.name}</h3>
             <br/>
-            <a href="/chosenhotel"><Img width="100%" src={hotel.Photo}/></a>
+            <a href="/chosenhotel"><Img width="100%" src={hotel.photo}/></a>
             <br/><br/>
-            <p> {hotel.Stars}/5</p>
-            <p> &#10163;  {hotel.Address}</p>
+            <p> {hotel.stars}/5</p>
+            <p> &#10163;  {hotel.address}</p>
             <p> Минимальная цена зa ночь: </p>
 
         </div>
 
 
     render() {
+        const {searchParams} = this.props;
+        console.log(this.state)
         return (
             <>
                 <div className="container">
                     <div style={{margin: 'auto'}} className="row">
                         <div className="col-lg work-field">
                             <div className="alert alert-light" role="alert">
-                                {this.state.hotels.map(hotel => this.getHotel(hotel))}
+                                {this.state.hotels.filter(({cityId}) => cityId === searchParams.city)
+                                    .map(hotel => this.getHotel(hotel))}
                                 {/*{this.state.hotels.filter({city_id} => city_id === Id)}   */}
                             </div>
                         </div>
@@ -62,3 +55,15 @@ export default class Hotel extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    searchParams: state.searchStore
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onUpdateSearchParams: (payload) => {
+        dispatch({type: 'UPDATE_SEARCH', payload});
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hotel);

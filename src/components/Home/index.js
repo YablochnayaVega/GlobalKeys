@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
 let Img = require('react-image');
 
- class Home extends Component {
+class Home extends Component {
     state = {
         cities: [],
         searchParams: {}
@@ -17,17 +18,19 @@ let Img = require('react-image');
     }
 
     getCity = (city) =>
-        <div onClick={ () => this.updateSearchParams(city.id)} style={{border: '1px double grey'}} className="alert alert-light" role="alert" key={city.id}>
-            <h3>{city.Name}</h3>
+        <div onClick={() => this.updateSearchParams(city.id)} style={{border: '1px double grey'}}
+             className="alert alert-light" role="alert" key={city.id}>
+            <h3>{city.name}</h3>
             <p> Количество предложений: {city.offers} </p>
             <p> Количество номеров: {city.rooms}</p>
             <Img width="100%" src={city.photo}/>
 
         </div>;
 
-     updateSearchParams = (cityId) => {
-         this.props.onUpdateSearchParams({...this.state.searchParams, city: cityId});
-     };
+    updateSearchParams = (cityId) => {
+        this.props.onUpdateSearchParams({...this.state.searchParams, city: cityId});
+        this.props.history.push('/hotels')
+    };
 
     render() {
         return (
@@ -52,13 +55,16 @@ let Img = require('react-image');
         )
     }
 }
-export default connect(
-    state => ({
-        searchParams: state.searchParams
-    }),
-    dispatch => ({
-        onUpdateSearchParams: (payload) => {
-            dispatch({type: 'UPDATE_SEARCH', payload});
-        },
-    })
-)(Home);
+
+export default withRouter(
+    connect(
+        state => ({
+            searchParams: state.searchParams
+        }),
+        dispatch => ({
+            onUpdateSearchParams: (payload) => {
+                dispatch({type: 'UPDATE_SEARCH', payload});
+            },
+        })
+    )(Home)
+);

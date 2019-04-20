@@ -1,7 +1,8 @@
 import React, {Component, createRef} from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
-class Header extends Component {
+class Index extends Component {
 
     state = {
         searchParams: {},
@@ -22,13 +23,14 @@ class Header extends Component {
 
     updateSearchParams = () => {
         this.props.onUpdateSearchParams(this.state.searchParams);
+        this.props.history.push('/hotels')
     };
 
     addCityToState = () => {
         this.setState({
             searchParams: {
                 ...this.state.searchParams,
-                city: this.cityRef.current.value
+                city: +this.cityRef.current.value
             }
         })
     };
@@ -98,18 +100,35 @@ class Header extends Component {
                                 </div>
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="dates">Дата прибытия</label>
-                                    <input ref={this.startDatetimeRef} onChange={this.addStartDatetimeToState}
-                                           className="form-control" type="date" required/>
+                                    <input
+                                        value={this.props.searchParams.startDatetime}
+                                        ref={this.startDatetimeRef}
+                                        onChange={this.addStartDatetimeToState}
+                                        className="form-control"
+                                        type="date"
+                                        required
+                                    />
                                 </div>
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="dates">Дата выезда</label>
-                                    <input ref={this.endDatetimeRef} onChange={this.addEndDatetimeToState}
-                                           className="form-control" type="date" required/>
+                                    <input
+                                        value={this.props.searchParams.endDatetime}
+                                        ref={this.endDatetimeRef}
+                                        onChange={this.addEndDatetimeToState}
+                                        className="form-control"
+                                        type="date"
+                                        required
+                                    />
                                 </div>
                                 <div className="col-md-2 mb-2">
                                     <label htmlFor="count_guests">Количество гостей</label>
-                                    <select ref={this.guestsCountRef} className="form-control"
-                                            onChange={this.addGuestsToState} required>
+                                    <select
+                                        value={this.props.searchParams.guests}
+                                        ref={this.guestsCountRef}
+                                        className="form-control"
+                                        onChange={this.addGuestsToState}
+                                        required
+                                    >
                                         <option/>
                                         <option>1</option>
                                         <option>2</option>
@@ -134,13 +153,15 @@ class Header extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        searchParams: state.searchStore
-    }),
-    dispatch => ({
-        onUpdateSearchParams: (payload) => {
-            dispatch({type: 'UPDATE_SEARCH', payload});
-        },
-    })
-)(Header);
+export default withRouter(
+    connect(
+        state => ({
+            searchParams: state.searchStore
+        }),
+        dispatch => ({
+            onUpdateSearchParams: (payload) => {
+                dispatch({type: 'UPDATE_SEARCH', payload});
+            },
+        })
+    )(Index)
+);

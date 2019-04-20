@@ -1,8 +1,8 @@
 const initialState = {
-    city: 1,
-    startDatetime: null,
-    endDatetime: null,
-    guests: null
+    // city: 1,
+    // startDatetime: null,
+    // endDatetime: null,
+    // guests: null
 };
 
 export default function reducer(state = initialState, action) {

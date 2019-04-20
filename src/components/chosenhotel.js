@@ -22,9 +22,9 @@ class ChosenHotel extends Component {
 
     getHotel = (hotel) =>
         <div className="alert alert-light" role="alert" key={hotel.Id}>
-            <h3>{hotel.Name}</h3>
+            <h3>{hotel.name}</h3>
             <br/>
-            <Img width="100%"  src={hotel.Photo}/>
+            <Img width="100%"  src={hotel.photo}/>
             <br/><br/>
             <div className="row">
                 <div className="col-md-6 mb-6">
@@ -34,7 +34,7 @@ class ChosenHotel extends Component {
                 </div>
                 <div className="col-md-6 mb-6">
                     <div>
-                        <p> &#10163;  {hotel.Address}</p>
+                        <p> &#10163;  {hotel.address}</p>
                         <span>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac lectus massa. Vivamus lobortis urna leo, a viverra turpis mattis at. Maecenas libero sem, ultrices non suscipit sed, lobortis vitae velit. Etiam massa orci, hendrerit ac elit pellentesque, gravida elementum neque. Aliquam eu porta augue. Vestibulum mollis ex sit amet ligula efficitur gravida. Sed faucibus nec erat non scelerisque. Morbi tellus risus, dictum vel ligula at, consectetur tempor lacus. Maecenas quis sollicitudin tortor, et commodo dolor. Fusce sit amet orci commodo, iaculis nibh ac, auctor massa. Etiam elementum tempus erat eget interdum. 
                         </span>
