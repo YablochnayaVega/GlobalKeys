@@ -9,7 +9,7 @@ import ChosenHotel from "./components/chosenhotel";
 // import Room from "./components/room";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-
+//test
 class App extends Component {
     render() {
         return <>
