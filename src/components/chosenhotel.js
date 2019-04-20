@@ -30,10 +30,7 @@ class ChosenHotel extends Component {
 
         fetch('http://globalkeys.herokuapp.com/api/booking', {
             mode: 'no-cors',
-            // mode: 'CORS',
-            // mode: 'cors',
             method: 'POST',
-            // body: JSON.stringify(out),
             body: out,
             headers: {
                 'Content-Type': 'application/json'
