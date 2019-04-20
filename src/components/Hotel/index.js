@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {withRouter} from "react-router";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 let Img = require('react-image');
 
@@ -26,7 +26,7 @@ class Hotel extends Component {
         <div style={{border: '1px double grey'}} className="alert alert-light" role="alert" key={hotel.id}>
             <h3>{hotel.name}</h3>
             <br/>
-            <div onClick={() => this.updateSearchParams(hotel.id)}><Img width="100%" src={hotel.photo}/></div>
+            <div onClick={this.updateHotelStore(hotel.id)}><Img width="100%" src={hotel.photo}/></div>
             <br/><br/>
             <p> {hotel.stars}/5</p>
             <p> &#10163;  {hotel.address}</p>
@@ -34,8 +34,8 @@ class Hotel extends Component {
 
         </div>
 
-    updateSearchParams = (id) => {
-        this.props.onUpdateSearchParams({...this.state.searchParams, hotel: id});
+    updateHotelStore = (id) => () => {
+        this.props.onUpdateHotelStore({hotel: id});
         this.props.history.push('/chosenhotels')
     };
 
@@ -62,13 +62,16 @@ class Hotel extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    searchParams: state.searchStore
+    searchParams: state.searchStore,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onUpdateSearchParams: (payload) => {
         dispatch({type: 'UPDATE_SEARCH', payload});
     },
+    onUpdateHotelStore: (payload) => {
+        dispatch({type: 'UPDATE_HOTEL_STORE', payload});
+    }
 });
 
-export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(Hotel));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Hotel));
