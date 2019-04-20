@@ -13,13 +13,12 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 class App extends Component {
     render() {
         return <>
-            {/* <Room/> */}
             <Router>
                 <Header/>
                 <Switch>
-                    <Route path="/home" component={Home}/>
                     <Route path="/hotels" component={Hotel}/>
                     <Route path="/chosenhotel" component={ChosenHotel} />
+                    <Route path="/" component={Home}/>
                 </Switch>
             </Router>
             <Footer/>
