@@ -1,5 +1,4 @@
 const initialState = {
-hotel:1
 };
 
 export default function reducer(state = initialState, action) {

@@ -10,7 +10,7 @@ class ChosenHotel extends Component {
     state = {
         hotels: [],
         searchParams: {},
-        visibleRoom: true
+        visibleRoom: false
     };
 
     changeVisibleRoomStatus = () => this.setState({visibleRoom: !this.state.visibleRoom});
