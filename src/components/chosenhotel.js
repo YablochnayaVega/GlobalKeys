@@ -28,7 +28,7 @@ class ChosenHotel extends Component {
 
 
 
-        fetch('http://globalkeys.herokuapp.com/api/booking', {
+        fetch('https://globalkeys.herokuapp.com/api/booking', {
             mode: 'no-cors',
             method: 'POST',
             body: out,
@@ -40,7 +40,7 @@ class ChosenHotel extends Component {
         }).catch(err => console.error(err));
 
 
-    }
+    };
 
     componentDidMount() {
         fetch('https://globalkeys.herokuapp.com/api/hotel')
