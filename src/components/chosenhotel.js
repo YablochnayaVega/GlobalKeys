@@ -17,8 +17,8 @@ class ChosenHotel extends Component {
     recervationRoom = () => {
         const {hotelStore, searchParams} = this.props;
         const out = JSON.stringify({
-            start_datetime: searchParams.startDatetime,
-            end_datetime: searchParams.endDatetime,
+            startDatetime: searchParams.startDatetime,
+            endDatetime: searchParams.endDatetime,
             cost: 5000,
             hotelId: hotelStore.hotel,
             roomId: 1,
