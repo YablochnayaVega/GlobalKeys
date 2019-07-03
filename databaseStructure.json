@@ -1,0 +1,45 @@
+{
+  "cities": {
+    "id": "number",
+    "name": "string",
+    "country": "string"
+  },
+  "hotels": {
+    "id": "number",
+    "city_id": "number",
+    "name": "string",
+    "string": "string",
+    "latitude": "string",
+    "longitude": "string"
+  },
+  "rooms": {
+    "id": "number",
+    "room": "string",
+    "capacity": "number",
+    "floor": "string",
+    "housing": "string",
+    "price": "string",
+    "hotel_id": "number"
+  },
+  "bookings": {
+    "id": "number",
+    "start_datetime": "date",
+    "end_datetime": "date",
+    "cost": "number",
+    "room_id": "number",
+    "customer_id": "number"
+  },
+  "users": {
+    "gender": "string",
+    "name": "string",
+    "surname": "string",
+    "patronymic": "string",
+    "birth": "date",
+    "email": "string",
+    "phone": "string",
+    "passport_series": "number",
+    "passport_number": "number",
+    "passport_issue_date": "date",
+    "passport_division_code": "number"
+  }
+}
